@@ -55,9 +55,6 @@ RUN pip3 install --upgrade pip && \
 RUN apt install -y graphviz && \
     pip3 install pydotplus==2.0.2
 
-# RUN pip3 install matplotlib==3.0.2 && \
-#     sed -i -r -e 's/#(font.serif *: *)/\1TakaoPMincho, /' /usr/local/lib/python3.5/dist-packages/matplotlib/mpl-data/matplotlibrc && \
-#     sed -i -r -e 's/#(font.sans-serif *: *)/\1TakaoPGothic, /' /usr/local/lib/python3.5/dist-packages/matplotlib/mpl-data/matplotlibrc
 ARG MATPLOTLIBRC=$PYTHON_ROOT/lib/python3.6/site-packages/matplotlib/mpl-data/matplotlibrc
 RUN pip3 install matplotlib==3.0.2 && \
     sed -i -r -e 's/#(font.serif *: *)/\1TakaoPMincho, /' $MATPLOTLIBRC && \

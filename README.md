@@ -49,7 +49,7 @@
 
 3. ターミナルからダウンロードしたフォルダに移動し、以下のコマンドを実行する
 
-   > ./load.sh
+   > ./build.sh
 
 ### Anaconda/Miniconda
 

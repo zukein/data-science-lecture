@@ -68,10 +68,12 @@ RUN pip3 install notebook==5.7.2 \
     && jupyter notebook --generate-config \
     && sed -i -e "s/#c.NotebookApp.token = '<generated>'/c.NotebookApp.token = 'jupyter'/" /root/.jupyter/jupyter_notebook_config.py
 RUN mkdir /root/.jupyter/custom
-COPY my-dark.css /root/.jupyter/custom/
 COPY my-light.css /root/.jupyter/custom/
 RUN cd /root/.jupyter/custom \
     && cp my-light.css custom.css
+# COPY my-dark.css /root/.jupyter/custom/
+# RUN cd /root/.jupyter/custom \
+#     && cp my-dark.css custom.css
 # RUN pip3 install jupyterthemes==0.19.6 \
 #     && jt -t monokai -f source -fs 12 -nf sourcesans -nfs 10 -tf sourcesans -tfs 14 -dfs 12 -ofs 12 -mathfs 100 -m auto -cursw 2 -cellw 80% -lineh 130 -altmd -T \
 #     && cd /root/.jupyter/custom \

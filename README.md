@@ -6,6 +6,7 @@
 ## Rコマンダーのインストール
 
 ### R言語をインストール
+
 - Mac
    1. [R言語](https://cran.r-project.org/bin/macosx/)
    2. [XQuartz](https://www.xquartz.org/)
@@ -14,27 +15,30 @@
    1. [R言語](https://cran.r-project.org/bin/windows/)
 
 ### RStudio(Rの統合開発環境)をインストール(任意)
+
 1. [RStudio](https://www.rstudio.com/products/rstudio/download/#download)
 
 ### Rコマンダーをインストール
+
 1. RまたはRStudioのコンソールから以下を入力してパッケージをインストール
    > install.packages(‘Rcmdr’, dependencies=TRUE)
 
 ## 実行環境の構築
+
 以下から環境を選択
 
 - Docker
-   - 講師と同じ環境
-   - WindowsはWindows10pro以外だと設定が難しい
+  - 講師と同じ環境
+  - WindowsはWindows10pro以外だと設定が難しい
 - Anaconda/Miniconda
-   - 比較的設定は容易
-   - Pythonライブラリ以外の必要なものは自分でインストールする必要あり
+  - 比較的設定は容易
+  - Pythonライブラリ以外の必要なものは自分でインストールする必要あり
 - Google ColabやAzure Notebooks(サポート対象外)
-   - タブレットからでも実行できる
-   - 3Dやインタラクティブなコンテンツなど一部動かないものがある
-   - デフォルトの環境にプリインストールされているもの以外は自分で導入する必要あり
+  - タブレットからでも実行できる
+  - 3Dやインタラクティブなコンテンツなど一部動かないものがある
+  - デフォルトの環境にプリインストールされているもの以外は自分で導入する必要あり
 
-### Docker
+### Dockerで構築
 
 1. Dockerをインストール
 
@@ -51,7 +55,7 @@
 
    > ./build.sh
 
-### Anaconda/Miniconda
+### Anaconda/Minicondaで構築
 
 1. Graphvizをインストール
 
@@ -89,7 +93,7 @@
 
 ## Jupyter notebookの使用方法
 
-### Docker
+### Dockerから使用
 
 1. Jupyterを起動する
 
@@ -103,7 +107,7 @@
 
    > ./stop.sh
 
-### Anaconda/Miniconda
+### Anaconda/Minicondaから使用
 
 1. 仮想環境に入る
 

@@ -43,15 +43,16 @@ RUN apt-get install -y \
 # INSTALL LIBRARY
 RUN pip3 install --upgrade pip && \
     pip3 install \
-    numpy==1.15.4 \
-    scipy==1.1.0 \
+    numpy==1.16.0 \
+    scipy==1.2.0 \
     statsmodels==0.9.0 \
-    scikit-learn==0.20.0 \
-    opencv-python==3.4.3.18 \
+    scikit-learn==0.20.2 \
+    opencv-python==4.0.0.21 \
     lightgbm==2.2.2 \
     tensorflow==1.12.0 \
     pandas==0.23.4 \
-    mlxtend==0.14.0
+    mlxtend==0.14.0 \
+    networkx==2.2
 RUN apt install -y graphviz && \
     pip3 install pydotplus==2.0.2
 
@@ -61,10 +62,10 @@ RUN pip3 install matplotlib==3.0.2 && \
     sed -i -r -e 's/#(font.sans-serif *: *)/\1TakaoPGothic, /' $MATPLOTLIBRC
 RUN pip3 install \
     seaborn==0.9.0 \
-    bokeh==1.0.1 \
+    bokeh==1.0.4 \
     matplotlib-venn==0.11.5
 
-RUN pip3 install notebook==5.7.2 \
+RUN pip3 install notebook==5.7.4 \
     && jupyter notebook --generate-config \
     && sed -i -e "s/#c.NotebookApp.token = '<generated>'/c.NotebookApp.token = 'jupyter'/" /root/.jupyter/jupyter_notebook_config.py
 RUN mkdir /root/.jupyter/custom
@@ -81,7 +82,7 @@ RUN cd /root/.jupyter/custom \
 #     && cat my.css theme.css > custom.css
 RUN pip3 install ipywidgets==7.4.2 && \
     jupyter nbextension enable --py widgetsnbextension && \
-    pip3 install jupyter_contrib_nbextensions==0.5.0 \
+    pip3 install jupyter_contrib_nbextensions==0.5.1 \
     && jupyter contrib nbextension install \
     && jupyter nbextension enable code_prettify/code_prettify \
     && jupyter nbextension enable codefolding/main \
@@ -98,8 +99,8 @@ RUN cd /root/.jupyter/nbconfig \
     && sed -i "2i   \"hinterland\": {\n    \"hint_delay\": \"400\"\n  }," ./notebook.json \
     && sed -i "2i   \"toc2\": {\n    \"toc_window_display\": true,\n    \"oc_window_display\": true,\n    \"skip_h1_title\": true\n  }," ./notebook.json
 RUN pip3 install \
-    nbdime==1.0.3 \
-    yapf==0.24.0
+    nbdime==1.0.4 \
+    yapf==0.25.0
 # just for fixing bug in jupyter_nbextensions_configurator
 # https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator/issues/72
 # https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator/pull/85/files

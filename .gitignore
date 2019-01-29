@@ -1,2 +1,3 @@
 .vscode
 *.log
+*/.ipynb_checkpoints/

@@ -51,6 +51,7 @@ RUN pip install --upgrade pip && \
     lightgbm==2.2.2 \
     tensorflow==1.12.0 \
     pandas==0.23.4 \
+    pandas-datareader==0.7.0 \
     mlxtend==0.14.0 \
     networkx==2.2
 RUN apt install -y graphviz && \
@@ -63,7 +64,8 @@ RUN pip install matplotlib==3.0.2 && \
 RUN pip install \
     seaborn==0.9.0 \
     bokeh==1.0.4 \
-    matplotlib-venn==0.11.5
+    matplotlib-venn==0.11.5 \
+    plotly==3.6.0
 
 RUN pip install notebook==5.7.4 \
     && jupyter notebook --generate-config \

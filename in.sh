@@ -1,2 +1,4 @@
-docker start dslec
-docker attach dslec
+. config.sh
+
+docker start $CONTAINER
+docker attach $CONTAINER

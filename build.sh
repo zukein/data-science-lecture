@@ -1,4 +1,6 @@
-docker build -t scenesk/dslec:0.1 .
-docker run --name dslec -p 8888:8888 -p 6006:6006 -v $(pwd)/workspace:/root/workspace -tid scenesk/dslec:0.1 bash
-docker exec dslec pip3 freeze > ./requirements.txt
-docker stop dslec
+. config.sh
+
+docker build -t $IMAGE .
+docker run --name $CONTAINER -p 8888:8888 -p 6006:6006 -v $(pwd)/workspace:/root/workspace -tid $IMAGE bash
+docker exec $CONTAINER pip freeze > requirements.txt
+docker stop $CONTAINER

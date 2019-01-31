@@ -1,3 +1,5 @@
-docker exec dslec jupyter notebook stop
+. config.sh
+
+docker exec $CONTAINER jupyter notebook stop
 rm out.log err.log
-docker stop dslec
+docker stop $CONTAINER

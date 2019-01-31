@@ -41,8 +41,8 @@ RUN apt-get install -y \
     rm -rf $PYENV_ROOT
 
 # INSTALL LIBRARY
-RUN pip3 install --upgrade pip && \
-    pip3 install \
+RUN pip install --upgrade pip && \
+    pip install \
     numpy==1.16.0 \
     scipy==1.2.0 \
     statsmodels==0.9.0 \
@@ -54,18 +54,18 @@ RUN pip3 install --upgrade pip && \
     mlxtend==0.14.0 \
     networkx==2.2
 RUN apt install -y graphviz && \
-    pip3 install pydotplus==2.0.2
+    pip install pydotplus==2.0.2
 
 ARG MATPLOTLIBRC=$PYTHON_ROOT/lib/python3.6/site-packages/matplotlib/mpl-data/matplotlibrc
-RUN pip3 install matplotlib==3.0.2 && \
+RUN pip install matplotlib==3.0.2 && \
     sed -i -r -e 's/#(font.serif *: *)/\1TakaoPMincho, /' $MATPLOTLIBRC && \
     sed -i -r -e 's/#(font.sans-serif *: *)/\1TakaoPGothic, /' $MATPLOTLIBRC
-RUN pip3 install \
+RUN pip install \
     seaborn==0.9.0 \
     bokeh==1.0.4 \
     matplotlib-venn==0.11.5
 
-RUN pip3 install notebook==5.7.4 \
+RUN pip install notebook==5.7.4 \
     && jupyter notebook --generate-config \
     && sed -i -e "s/#c.NotebookApp.token = '<generated>'/c.NotebookApp.token = 'jupyter'/" /root/.jupyter/jupyter_notebook_config.py
 RUN mkdir /root/.jupyter/custom
@@ -80,9 +80,9 @@ RUN cd /root/.jupyter/custom \
 #     && cd /root/.jupyter/custom \
 #     && mv custom.css theme.css \
 #     && cat my.css theme.css > custom.css
-RUN pip3 install ipywidgets==7.4.2 && \
+RUN pip install ipywidgets==7.4.2 && \
     jupyter nbextension enable --py widgetsnbextension && \
-    pip3 install jupyter_contrib_nbextensions==0.5.1 \
+    pip install jupyter_contrib_nbextensions==0.5.1 \
     && jupyter contrib nbextension install \
     && jupyter nbextension enable code_prettify/code_prettify \
     && jupyter nbextension enable codefolding/main \
@@ -98,13 +98,9 @@ RUN jupyter notebook --allow-root --no-browser --ip=0.0.0.0 &
 RUN cd /root/.jupyter/nbconfig \
     && sed -i "2i   \"hinterland\": {\n    \"hint_delay\": \"400\"\n  }," ./notebook.json \
     && sed -i "2i   \"toc2\": {\n    \"toc_window_display\": true,\n    \"oc_window_display\": true,\n    \"skip_h1_title\": true\n  }," ./notebook.json
-RUN pip3 install \
+RUN pip install \
     nbdime==1.0.4 \
     yapf==0.25.0
-# just for fixing bug in jupyter_nbextensions_configurator
-# https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator/issues/72
-# https://github.com/Jupyter-contrib/jupyter_nbextensions_configurator/pull/85/files
-RUN sed -i -e "s/var $ = require('jqueryui');/var $ = require('jquery');/" $PYTHON_ROOT/lib/python3.6/site-packages/jupyter_nbextensions_configurator/static/nbextensions_configurator/tree_tab/main.js
 
 # CLEAN UP
 RUN apt clean && \

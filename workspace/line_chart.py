@@ -7,9 +7,7 @@ except:
     pass
 
 #%%
-import datetime
 import pandas as pd
-import pandas_datareader.data as web
 import matplotlib.pyplot as plt
 import seaborn as sns
 from IPython.display import display
@@ -98,77 +96,4 @@ display(economics)
 
 #%%
 economics['psavert'].plot()
-plt.show()
-
-#%% [markdown]
-# ## 複数系列グラフ
-# ---
-# 同じ時間軸上に表示された複数の変数のグラフ。
-
-#%%
-start = datetime.datetime(2008, 1, 1)
-end = datetime.datetime(2017, 12, 31)
-inflation = web.DataReader(['CPIAUCSL', 'CPILFESL'], 'fred', start, end)
-print('inflation')
-display(inflation)
-inflation.plot()
-plt.show()
-
-#%% [markdown]
-# ### Pythonでの複数系列グラフ表示
-# ---
-# `seaborn.lineplot`、`pandas.DataFrame.plot`、`matplotlib.pyplot.plot`などを用いる。
-
-#%%
-start = datetime.datetime(2018, 1, 1)
-end = datetime.datetime(2018, 12, 31)
-google = web.DataReader('GOOGL', 'iex', start, end)['close']
-apple = web.DataReader('AAPL', 'iex', start, end)['close']
-facebook = web.DataReader('FB', 'iex', start, end)['close']
-amazon = web.DataReader('AMZN', 'iex', start, end)['close']
-stocks = pd.DataFrame(
-    dict(Google=google, Apple=apple, Facebook=facebook, Amazon=amazon))
-print('stocks')
-display(stocks)
-
-#%%
-help(sns.lineplot)
-
-#%%
-sns.lineplot(data=stocks[['Google', 'Apple']])
-monthly = pd.date_range(stocks.index[0], stocks.index[-1], freq='M')
-xticks = [i for i, d in enumerate(stocks.index) if d in monthly]
-xticklabels = stocks.index[xticks]
-plt.xticks(xticks, xticklabels, rotation='vertical')
-plt.show()
-
-#%%
-help(pd.DataFrame.plot)
-
-#%%
-stocks[['Facebook', 'Amazon']].plot(xticks=xticks)
-plt.xticks(rotation='vertical')
-plt.show()
-
-#%%
-help(plt.plot)
-
-#%%
-plt.plot(stocks.index, stocks[['Apple', 'Amazon']])
-plt.xticks(xticks, xticklabels, rotation='vertical')
-plt.show()
-
-#%% [markdown]
-# ###### 練習問題
-#
-# economicsデータセットの`psavert`列と`uempmed`列を折れ線グラフで表示する。
-
-#%%
-print('economics')
-display(economics)
-
-#%%
-
-#%%
-economics.plot('date', ['psavert', 'uempmed'])
 plt.show()

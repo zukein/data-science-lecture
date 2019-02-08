@@ -265,7 +265,7 @@ plt.show()
 #%% [markdown]
 # ###### 練習問題
 #
-# passengersデータセットを`pandas.DataFrame.shift`関数を用いて、前年同期との成長率・対数差分を表す`成長率`列・`対数差分`列を作成し、複数系列折れ線グラフで重ねて表示する。
+# passengersデータセットを`pandas.DataFrame.shift`関数や`pandas.DataFrame.diff`関数を用いて、前年同期との成長率・対数差分を表す`成長率`列・`対数差分`列を作成し、複数系列折れ線グラフで重ねて表示する。
 
 #%%
 flights = sns.load_dataset('flights')
@@ -276,5 +276,8 @@ plt.show()
 
 #%%
 help(pd.DataFrame.shift)
+
+#%%
+help(pd.DataFrame.diff)
 
 #%%

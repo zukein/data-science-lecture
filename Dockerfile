@@ -98,7 +98,7 @@ RUN pip install ipywidgets==7.4.2 && \
     && jupyter nbextension enable varInspector/main
 RUN jupyter notebook --allow-root --no-browser --ip=0.0.0.0 &
 RUN cd /root/.jupyter/nbconfig \
-    && sed -i "2i   \"hinterland\": {\n    \"hint_delay\": \"400\"\n  }," ./notebook.json \
+    && sed -i "2i   \"hinterland\": {\n    \"hint_delay\": \"500\"\n  }," ./notebook.json \
     && sed -i "2i   \"toc2\": {\n    \"toc_window_display\": true,\n    \"oc_window_display\": true,\n    \"skip_h1_title\": true\n  }," ./notebook.json
 RUN pip install \
     nbdime==1.0.4 \

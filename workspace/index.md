@@ -73,7 +73,9 @@
 
 #### [クラスタリングの概要](clustering.ipynb)
 
-#### k-means
+#### [k-means](kmeans.ipynb)
+---
+k-means を実行できる
 
 #### mean-shift
 

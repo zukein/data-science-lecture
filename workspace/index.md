@@ -77,7 +77,9 @@
 ---
 k-means を実行できる
 
-#### mean-shift
+#### [Mean Shift](mean_shift.ipynb)
+---
+Mean Shift を実行できる
 
 #### 階層的クラスタリング
 

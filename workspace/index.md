@@ -81,7 +81,9 @@ k-means を実行できる
 ---
 Mean Shift を実行できる
 
-#### 階層的クラスタリング
+#### [階層的クラスタリング](hierarchical_clustering.ipynb)
+---
+階層的クラスタリングを実行できる
 
 ### [確率分布を理解する](distribution.ipynb)
 ---

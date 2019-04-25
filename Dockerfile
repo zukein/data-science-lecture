@@ -53,7 +53,8 @@ RUN pip install --upgrade pip && \
     pandas==0.23.4 \
     pandas-datareader==0.7.0 \
     mlxtend==0.14.0 \
-    networkx==2.2
+    networkx==2.2 \
+    sqlalchemy==1.3.2
 RUN apt install -y graphviz && \
     pip install pydotplus==2.0.2
 

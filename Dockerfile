@@ -11,12 +11,14 @@ RUN apt install -y \
     fonts-takao
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV TZ Asia/Tokyo
+ARG DEBIAN_FRONTEND=noninteractive
 
 # INSTALL PYTHON
 ARG PYTHON_VERSION=3.6.8
 ARG PYTHON_ROOT=$HOME/local/python-$PYTHON_VERSION
 ENV PATH=$PYTHON_ROOT/bin:$PATH
 ARG PYENV_ROOT=$HOME/.pyenv
+ARG LD_RUN_PATH=/usr/local/lib
 RUN apt-get install -y \
     git \
     make \
@@ -25,7 +27,6 @@ RUN apt-get install -y \
     zlib1g-dev \
     libbz2-dev \
     libreadline-dev \
-    libsqlite3-dev \
     wget \
     curl \
     llvm \
@@ -35,6 +36,15 @@ RUN apt-get install -y \
     tk-dev \
     libffi-dev \
     liblzma-dev && \
+    wget https://www.sqlite.org/2019/sqlite-autoconf-3280000.tar.gz && \
+    tar -xvf sqlite-autoconf-3280000.tar.gz && \
+    rm sqlite-autoconf-3280000.tar.gz && \
+    cd sqlite-autoconf-3280000 && \
+    ./configure && \
+    make && \
+    make install && \
+    cd .. && \
+    rm -rf sqlite-autoconf-3280000 && \
     git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT && \
     $PYENV_ROOT/plugins/python-build/install.sh && \
     /usr/local/bin/python-build -v $PYTHON_VERSION $PYTHON_ROOT && \
@@ -68,6 +78,7 @@ RUN pip install \
     matplotlib-venn==0.11.5 \
     plotly==3.6.0
 
+# INSTALL JUPYTER NOTEBOOK
 RUN pip install notebook==5.7.4 \
     && jupyter notebook --generate-config \
     && sed -i -e "s/#c.NotebookApp.token = '<generated>'/c.NotebookApp.token = 'jupyter'/" /root/.jupyter/jupyter_notebook_config.py

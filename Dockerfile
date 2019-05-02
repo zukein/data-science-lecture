@@ -1,5 +1,5 @@
 # UPDATE OS
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 USER root
 ENV HOME /root
 ARG VERSION=0.1
@@ -104,6 +104,9 @@ RUN cd /root/.jupyter/nbconfig \
 RUN pip install \
     nbdime==1.0.4 \
     yapf==0.25.0
+# Downgrade tornado to fix not to connected to kernel error in tornado 6.0.0
+# https://github.com/jupyter/notebook/issues/2664
+RUN pip install tornado==5.1.1
 
 # CLEAN UP
 RUN apt clean && \

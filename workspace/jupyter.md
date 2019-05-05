@@ -7,7 +7,7 @@ IDE (統合開発環境) のような [JupyterLab](https://jupyterlab.readthedoc
 Python 以外にも様々な言語が利用可能。  
 [beakerx](https://nbviewer.jupyter.org/github/twosigma/beakerx/blob/master/doc/groovy/GeneralAutotranslation.ipynb) を利用すると、変数の中身を別言語にコピー可能。
 
-[Binder](https://mybinder.readthedocs.io/en/latest/) を利用するとクラウドで実行環境も提供可能。
+[Google Colab](https://colab.research.google.com/)・[Azure Notebooks](https://notebooks.azure.com/)・[Binder](https://mybinder.readthedocs.io/en/latest/) などを利用するとクラウドで実行環境も提供可能。
 
 ## Jupyter Notebook の使い方
 

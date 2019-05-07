@@ -79,7 +79,7 @@ help(LinearRegression)
 # 最初にインスタンスを作成
 model = LinearRegression()
 # fitメソッドで回帰直線を求める
-# xはサイズが(サンプル数 × 変数の数)の行列でなければならない
+# xはサイズが(サンプルサイズ × 変数の数)の行列でなければならない
 x = reg['x'].values.reshape((-1, 1))
 y = reg['y']
 model.fit(x, y)

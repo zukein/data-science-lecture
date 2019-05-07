@@ -185,7 +185,7 @@ help(LogisticRegression)
 # 最初にインスタンスを作成
 model = LogisticRegression()
 # fitメソッドで分布関数を求める
-# xはサイズが(サンプル数 × 変数の数)の行列でなければならない
+# xはサイズが(サンプルサイズ × 変数の数)の行列でなければならない
 x = clf['x'].values.reshape((-1, 1))
 y = clf['y']
 model.fit(x, y)

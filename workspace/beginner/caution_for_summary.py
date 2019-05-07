@@ -1,10 +1,10 @@
 #%% Change working directory from the workspace root to the ipynb file location. Turn this addition off with the DataSciece.changeDirOnImportExport setting
 import os
 try:
-	os.chdir(os.path.join(os.getcwd(), 'workspace'))
-	print(os.getcwd())
+    os.chdir(os.path.join(os.getcwd(), 'workspace'))
+    print(os.getcwd())
 except:
-	pass
+    pass
 
 #%%
 import pandas as pd
@@ -109,7 +109,7 @@ trump
 
 #%% [markdown]
 # 一方、以下のように従前の治療法と新しい治療法を男女別に比較したデータだとすると、男女別で集計した場合と全体で集計した場合に結論が異なるのはおかしいと感じられる。
-# そのため、男女の治療法に対する選好の違いを考えたり、男女のサンプル数の違いによる影響をコントロールしたりして、詳しく検討する必要がある。
+# そのため、男女の治療法に対する選好の違いを考えたり、男女のサンプルサイズの違いによる影響をコントロールしたりして、詳しく検討する必要がある。
 
 #%%
 treat = cross2.copy()
@@ -176,12 +176,10 @@ population = pd.read_csv(
         'Estimate; Total: - Female: - 75 years and over: - Veteran',
         'Estimate; Total: - Female: - 75 years and over: - Nonveteran'
     ])
-population.columns = [col.replace('Estimate; ', '') for col in population.columns]
+population.columns = [
+    col.replace('Estimate; ', '') for col in population.columns
+]
 print('population')
 display(population)
 
-
 #%%
-
-
-

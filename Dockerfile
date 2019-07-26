@@ -105,6 +105,7 @@ RUN pip install ipywidgets==7.4.2 && \
     && jupyter nbextension enable hide_input/main \
     && jupyter nbextension enable hinterland/hinterland \
     && jupyter nbextension enable livemdpreview/livemdpreview \
+    && jupyter nbextension enable python-markdown/main \
     && jupyter nbextension enable ruler/main \
     && jupyter nbextension enable toc2/main \
     && jupyter nbextension enable varInspector/main

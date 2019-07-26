@@ -1,4 +1,4 @@
-conda create -n dslec python=3.6.7
+conda create -n dslec python=3.6.8
 conda activate dslec
 pip install --upgrade pip
 pip install --user -r ./requirements.txt

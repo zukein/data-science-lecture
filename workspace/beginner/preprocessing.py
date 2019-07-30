@@ -146,8 +146,7 @@ usarrests['state'].map(state_code)
 #%% [markdown]
 # ### 自己結合
 # ---
-# `FROM`に続くテーブル名に別の名前をつけることができるので、これを利用して自信のカラムの値をキーにして結合できる。
-
+# `FROM`に続くテーブル名に別の名前をつけることができるので、これを利用して自身のカラムの値をキーにして結合できる。
 #%%
 engine = sqlalchemy.create_engine('sqlite:///data/chinook.db')
 pd.read_sql('employees', engine)
@@ -404,8 +403,8 @@ def sqlite_engine_creator():
     return con
 
 
-engine_with_stdev = sqlalchemy.create_engine(
-    'sqlite://', creator=sqlite_engine_creator)
+engine_with_stdev = sqlalchemy.create_engine('sqlite://',
+                                             creator=sqlite_engine_creator)
 pd.read_sql('SELECT STDEV(sepal_length) AS sep_len_std FROM iris',
             engine_with_stdev)
 
@@ -429,10 +428,10 @@ pd.read_sql(
 
 #%%
 pd.read_sql(
-    '''SELECT MIN(sepal_length) AS sep_len_max,
-              MIN(sepal_width) AS sep_wid_max,
-              MIN(petal_length) AS pet_len_max,
-              MIN(petal_width) AS pet_wid_max
+    '''SELECT MIN(sepal_length) AS sep_len_min,
+              MIN(sepal_width) AS sep_wid_min,
+              MIN(petal_length) AS pet_len_min,
+              MIN(petal_width) AS pet_wid_min
        FROM iris''', engine)
 
 #%% [markdown]
@@ -576,6 +575,9 @@ display(mpg)
 help(pd.DataFrame.groupby)
 
 #%%
+#%% [markdown]
+# `groupby`のメソッド。
+
 print([
     p for p in dir(pd.core.groupby.groupby.DataFrameGroupBy)
     if not p.startswith('_')
@@ -719,9 +721,8 @@ wsr = pd.read_sql(
             [f'(CASE {col} WHEN NULL THEN 0 ELSE 1 END)' for col in cols])),
     engine,
     index_col='Date')
-wsr.apply(
-    lambda r: np.nan if r['count'] == 0 else r['sum'] / r['count'], axis=1)
-
+wsr.apply(lambda r: np.nan if r['count'] == 0 else r['sum'] / r['count'],
+          axis=1)
 #%% [markdown]
 # #### 移動平均
 # ---

@@ -1,7 +1,8 @@
-#%% Change working directory from the workspace root to the ipynb file location. Turn this addition off with the DataSciece.changeDirOnImportExport setting
+#%% Change working directory from the workspace root to the ipynb file location. Turn this addition off with the DataScience.changeDirOnImportExport setting
+# ms-python.python added
 import os
 try:
-    os.chdir(os.path.join(os.getcwd(), 'workspace'))
+    os.chdir(os.path.join(os.getcwd(), 'workspace/beginner'))
     print(os.getcwd())
 except:
     pass
@@ -10,9 +11,9 @@ except:
 import datetime
 import pandas as pd
 import pandas_datareader.data as web
-from IPython.display import display
 import matplotlib.pyplot as plt
 import seaborn as sns
+from IPython.display import display
 pd.set_option('max_rows', 5)
 
 #%% [markdown]
@@ -42,7 +43,7 @@ print('tips')
 display(tips)
 
 #%%
-help(ns.countplot)
+help(sns.countplot)
 
 #%%
 sns.countplot('day', hue='sex', data=tips)
@@ -53,9 +54,10 @@ plt.show()
 help(pd.DataFrame.plot.bar)
 
 #%%
-pd.crosstab(
-    tips['day'], tips['smoker'], values=tips['total_bill'],
-    aggfunc=sum).plot.bar()
+pd.crosstab(tips['day'],
+            tips['smoker'],
+            values=tips['total_bill'],
+            aggfunc=sum).plot.bar()
 plt.title('喫煙者かどうかでグループ分けした曜日ごとの売り上げ')
 plt.show()
 
@@ -90,9 +92,10 @@ plt.show()
 help(pd.DataFrame.plot.bar)
 
 #%%
-pd.crosstab(
-    tips['day'], tips['smoker'], values=tips['total_bill'],
-    aggfunc=sum).plot.bar(stacked=True)
+pd.crosstab(tips['day'],
+            tips['smoker'],
+            values=tips['total_bill'],
+            aggfunc=sum).plot.bar(stacked=True)
 plt.title('喫煙者かどうかでグループ分けした曜日ごとの売り上げ')
 plt.show()
 
@@ -124,12 +127,11 @@ plt.show()
 # データセットの数値を割合に計算し直してから、`pandas.DataFrame.plot.bar`を用いる。
 
 #%%
-pd.crosstab(
-    tips['day'],
-    tips['smoker'],
-    values=tips['total_bill'],
-    aggfunc=sum,
-    normalize='index').plot.bar(stacked=True)
+pd.crosstab(tips['day'],
+            tips['smoker'],
+            values=tips['total_bill'],
+            aggfunc=sum,
+            normalize='index').plot.bar(stacked=True)
 plt.title('喫煙者かどうかでグループ分けした曜日ごとの売り上げ')
 plt.show()
 
@@ -236,11 +238,10 @@ help(plt.scatter)
 
 #%%
 for label in sorted(mpg['cylinders'].unique()):
-    plt.scatter(
-        'weight',
-        'horsepower',
-        data=mpg.query('cylinders==@label'),
-        label=label)
+    plt.scatter('weight',
+                'horsepower',
+                data=mpg.query('cylinders==@label'),
+                label=label)
 plt.legend()
 plt.title('シリンダー数でグループ分けした重量と馬力の関係')
 plt.show()
@@ -275,12 +276,11 @@ init_notebook_mode(connected=True)
 data = []
 for label in sorted(mpg['cylinders'].unique()):
     subset = mpg.query('cylinders==@label')
-    trace = go.Scatter(
-        x=subset['weight'],
-        y=subset['horsepower'],
-        name=str(label),
-        mode='markers',
-        hovertext=subset['name'])
+    trace = go.Scatter(x=subset['weight'],
+                       y=subset['horsepower'],
+                       name=str(label),
+                       mode='markers',
+                       hovertext=subset['name'])
     data.append(trace)
 layout = dict(title='シリンダー数でグループ分けした重量と馬力の関係')
 fig = dict(data=data, layout=layout)
@@ -310,14 +310,16 @@ plt.show()
 # `seaborn.lineplot`、`pandas.DataFrame.plot`、`matplotlib.pyplot.plot`などを用いる。
 
 #%%
+tiingo_access_key = 'YOUR_API_KEY'
 start = datetime.datetime(2018, 1, 1)
 end = datetime.datetime(2018, 12, 31)
-google = web.DataReader('GOOGL', 'iex', start, end)['close']
-apple = web.DataReader('AAPL', 'iex', start, end)['close']
-facebook = web.DataReader('FB', 'iex', start, end)['close']
-amazon = web.DataReader('AMZN', 'iex', start, end)['close']
-stocks = pd.DataFrame(
-    dict(Google=google, Apple=apple, Facebook=facebook, Amazon=amazon))
+column_map = dict(GOOGL='Google', AAPL='Apple', FB='Facebook', AMZN='Amazon')
+stocks = web.DataReader(['GOOGL', 'AAPL', 'FB', 'AMZN'],
+                        'tiingo',
+                        start,
+                        end,
+                        access_key=tiingo_access_key)['close'].unstack(level=0)
+stocks.columns = [column_map[k] for k in stocks.columns]
 print('stocks')
 display(stocks)
 
@@ -327,8 +329,9 @@ help(sns.lineplot)
 #%%
 sns.lineplot(data=stocks[['Google', 'Apple']])
 monthly = pd.date_range(stocks.index[0], stocks.index[-1], freq='M')
-xticks = [i for i, d in enumerate(stocks.index) if d in monthly]
-xticklabels = stocks.index[xticks]
+idx = [i for i, d in enumerate(stocks.index) if d in monthly]
+xticks = stocks.index[idx]
+xticklabels = stocks.index.date[idx]
 plt.xticks(xticks, xticklabels, rotation='vertical')
 plt.show()
 
@@ -336,8 +339,8 @@ plt.show()
 help(pd.DataFrame.plot)
 
 #%%
-stocks[['Facebook', 'Amazon']].plot(xticks=xticks)
-plt.xticks(rotation='vertical')
+stocks[['Facebook', 'Amazon']].plot()
+plt.xticks(xticks, xticklabels, rotation='vertical')
 plt.show()
 
 #%%

@@ -1,7 +1,8 @@
 #%% Change working directory from the workspace root to the ipynb file location. Turn this addition off with the DataScience.changeDirOnImportExport setting
+# ms-python.python added
 import os
 try:
-    os.chdir(os.path.join(os.getcwd(), 'workspace'))
+    os.chdir(os.path.join(os.getcwd(), 'workspace/beginner'))
     print(os.getcwd())
 except:
     pass
@@ -189,11 +190,15 @@ plt.show()
 # stocksデータセットの各列を`pandas.DataFrame.apply`を用いて`2018-01-02`時点の値を基準に指数化したデータフレーム`scaled`を作成し、複数系列折れ線グラフで表示する。
 
 #%%
+tiingo_access_key = 'YOUR_API_KEY'
 start = datetime.datetime(2018, 1, 1)
 end = datetime.datetime(2018, 12, 31)
 column_map = dict(GOOGL='Google', AAPL='Apple', FB='Facebook', AMZN='Amazon')
-stocks = web.DataReader(['GOOGL', 'AAPL', 'FB', 'AMZN'], 'iex', start,
-                        end)['close']
+stocks = web.DataReader(['GOOGL', 'AAPL', 'FB', 'AMZN'],
+                        'tiingo',
+                        start,
+                        end,
+                        access_key=tiingo_access_key)['close'].unstack(level=0)
 stocks.columns = [column_map[k] for k in stocks.columns]
 print('stocks')
 display(stocks)
@@ -240,11 +245,10 @@ plt.show()
 # gdpデータセットの対数をとったデータセット`log_gdp`を作成し、複数系列折れ線グラフを表示する。
 
 #%%
-gdp = wb.download(
-    indicator='NY.GDP.MKTP.CD',
-    country=['JP', 'US', 'CN'],
-    start=1960,
-    end=2017).unstack(level=0).astype(int)
+gdp = wb.download(indicator='NY.GDP.MKTP.CD',
+                  country=['JP', 'US', 'CN'],
+                  start=1960,
+                  end=2017).unstack(level=0).astype(int)
 gdp.columns = gdp.columns.levels[1]
 print('gdp')
 display(gdp)

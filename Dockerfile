@@ -79,7 +79,7 @@ RUN pip install \
     plotly==3.6.0
 
 # INSTALL JUPYTER NOTEBOOK
-RUN pip install notebook==5.7.4 \
+RUN pip install notebook==5.7.8 \
     && jupyter notebook --generate-config \
     && sed -i -e "s/#c.NotebookApp.token = '<generated>'/c.NotebookApp.token = 'jupyter'/" /root/.jupyter/jupyter_notebook_config.py
 RUN mkdir /root/.jupyter/custom
@@ -116,9 +116,6 @@ RUN cd /root/.jupyter/nbconfig \
 RUN pip install \
     nbdime==1.0.4 \
     yapf==0.25.0
-# Downgrade tornado to fix not to connected to kernel error in tornado 6.0.0
-# https://github.com/jupyter/notebook/issues/2664
-RUN pip install tornado==5.1.1
 
 # CLEAN UP
 RUN apt clean && \

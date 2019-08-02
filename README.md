@@ -117,5 +117,5 @@
 
 3. Jupyterを終了する
 
-   > Ctrl+C
+   > Ctrl+C  
    > conda deactivate

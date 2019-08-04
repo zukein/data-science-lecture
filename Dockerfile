@@ -63,10 +63,12 @@ RUN pip install --upgrade pip && \
     pandas==0.23.4 \
     pandas-datareader==0.7.0 \
     mlxtend==0.14.0 \
-    networkx==2.2 \
+    networkx==2.3 \
     sqlalchemy==1.3.2
 RUN apt install -y graphviz && \
-    pip install pydotplus==2.0.2
+    pip install \
+    pydot==1.4.1 \
+    pydotplus==2.0.2
 
 ARG MATPLOTLIBRC=$PYTHON_ROOT/lib/python3.6/site-packages/matplotlib/mpl-data/matplotlibrc
 RUN pip install matplotlib==3.0.2 && \

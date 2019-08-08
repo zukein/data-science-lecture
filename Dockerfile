@@ -14,12 +14,12 @@ ENV TZ Asia/Tokyo
 ARG DEBIAN_FRONTEND=noninteractive
 
 # INSTALL PYTHON
-ARG PYTHON_VERSION=3.6.8
+ARG PYTHON_VERSION=3.7.4
 ARG PYTHON_ROOT=$HOME/local/python-$PYTHON_VERSION
 ENV PATH=$PYTHON_ROOT/bin:$PATH
 ARG PYENV_ROOT=$HOME/.pyenv
 ARG LD_RUN_PATH=/usr/local/lib
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     git \
     make \
     build-essential \
@@ -53,32 +53,32 @@ RUN apt-get install -y \
 # INSTALL LIBRARY
 RUN pip install --upgrade pip && \
     pip install \
-    numpy==1.16.0 \
-    scipy==1.2.0 \
-    statsmodels==0.9.0 \
-    scikit-learn==0.20.2 \
-    opencv-python==4.0.0.21 \
-    lightgbm==2.2.2 \
-    tensorflow==1.12.0 \
-    pandas==0.23.4 \
-    pandas-datareader==0.7.0 \
-    mlxtend==0.14.0 \
+    numpy==1.17.0 \
+    scipy==1.3.0 \
+    statsmodels==0.10.1 \
+    scikit-learn==0.21.3 \
+    opencv-python==4.1.0.25 \
+    lightgbm==2.2.3 \
+    tensorflow==1.14.0 \
+    pandas==0.25.0 \
+    pandas-datareader==0.7.4 \
+    mlxtend==0.17.0 \
     networkx==2.3 \
-    sqlalchemy==1.3.2
+    sqlalchemy==1.3.6
 RUN apt install -y graphviz && \
     pip install \
     pydot==1.4.1 \
     pydotplus==2.0.2
 
-ARG MATPLOTLIBRC=$PYTHON_ROOT/lib/python3.6/site-packages/matplotlib/mpl-data/matplotlibrc
-RUN pip install matplotlib==3.0.2 && \
+ARG MATPLOTLIBRC=$PYTHON_ROOT/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc
+RUN pip install matplotlib==3.1.1 && \
     sed -i -r -e 's/#(font.serif *: *)/\1TakaoPMincho, /' $MATPLOTLIBRC && \
     sed -i -r -e 's/#(font.sans-serif *: *)/\1TakaoPGothic, /' $MATPLOTLIBRC
 RUN pip install \
     seaborn==0.9.0 \
-    bokeh==1.0.4 \
+    bokeh==1.3.4 \
     matplotlib-venn==0.11.5 \
-    plotly==3.6.0
+    plotly==4.1.0
 
 # INSTALL JUPYTER NOTEBOOK
 RUN pip install notebook==5.7.8 \
@@ -96,7 +96,7 @@ RUN cd /root/.jupyter/custom \
 #     && cd /root/.jupyter/custom \
 #     && mv custom.css theme.css \
 #     && cat my.css theme.css > custom.css
-RUN pip install ipywidgets==7.4.2 && \
+RUN pip install ipywidgets==7.5.1 && \
     jupyter nbextension enable --py widgetsnbextension && \
     pip install jupyter_contrib_nbextensions==0.5.1 \
     && jupyter contrib nbextension install \
@@ -113,11 +113,11 @@ RUN pip install ipywidgets==7.4.2 && \
     && jupyter nbextension enable varInspector/main
 RUN jupyter notebook --allow-root --no-browser --ip=0.0.0.0 &
 RUN cd /root/.jupyter/nbconfig \
-    && sed -i "2i   \"hinterland\": {\n    \"hint_delay\": \"500\"\n  }," ./notebook.json \
+    && sed -i "2i   \"hinterland\": {\n    \"hint_delay\": \"600\"\n  }," ./notebook.json \
     && sed -i "2i   \"toc2\": {\n    \"toc_window_display\": true,\n    \"oc_window_display\": true,\n    \"skip_h1_title\": true\n  }," ./notebook.json
 RUN pip install \
-    nbdime==1.0.4 \
-    yapf==0.25.0
+    nbdime==1.1.0 \
+    yapf==0.28.0
 
 # CLEAN UP
 RUN apt clean && \

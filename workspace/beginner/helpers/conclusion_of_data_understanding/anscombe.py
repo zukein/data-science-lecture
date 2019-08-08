@@ -9,7 +9,7 @@ class Anscombe(object):
     def __init__(self):
         anscombe = sns.load_dataset('anscombe')
         levels = [sorted(anscombe['dataset'].unique()), ['x', 'y']]
-        labels = np.array([i for i in np.ndindex(*[len(l) for l in levels])]).T
+        codes = np.array([i for i in np.ndindex(*[len(l) for l in levels])]).T
         values = None
         for dataset in levels[0]:
             for var in levels[1]:
@@ -17,7 +17,7 @@ class Anscombe(object):
                 values = np.column_stack([values, subset
                                           ]) if values is not None else subset
         self.data = pd.DataFrame(
-            values, columns=pd.MultiIndex(levels=levels, labels=labels))
+            values, columns=pd.MultiIndex(levels=levels, codes=codes))
 
     def show(self):
         names = self.data.columns.levels[0].tolist()

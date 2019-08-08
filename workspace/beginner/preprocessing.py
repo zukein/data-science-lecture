@@ -579,7 +579,7 @@ help(pd.DataFrame.groupby)
 # `groupby`のメソッド。
 
 print([
-    p for p in dir(pd.core.groupby.groupby.DataFrameGroupBy)
+    p for p in dir(pd.core.groupby.DataFrameGroupBy)
     if not p.startswith('_')
 ])
 

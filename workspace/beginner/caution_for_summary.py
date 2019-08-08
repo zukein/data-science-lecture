@@ -28,10 +28,9 @@ pd.set_option('precision', 3)
 
 #%%
 simpson1 = pd.read_csv('data/simpson1.csv')
-cross = pd.crosstab(
-    simpson1['品質'], [simpson1['製品'], simpson1['工場']],
-    values=simpson1['数量'],
-    aggfunc=sum)
+cross = pd.crosstab(simpson1['品質'], [simpson1['製品'], simpson1['工場']],
+                    values=simpson1['数量'],
+                    aggfunc=sum)
 cross.index.name = None
 cross.columns.names = [None, None]
 cross
@@ -40,11 +39,10 @@ cross
 # 列方向に割合を集計すると製品 A でも製品 B でも工場 1 のほうが不良品率は低い。
 
 #%%
-cross_ratio = pd.crosstab(
-    simpson1['品質'], [simpson1['製品'], simpson1['工場']],
-    values=simpson1['数量'],
-    aggfunc=sum,
-    normalize='columns')
+cross_ratio = pd.crosstab(simpson1['品質'], [simpson1['製品'], simpson1['工場']],
+                          values=simpson1['数量'],
+                          aggfunc=sum,
+                          normalize='columns')
 cross_ratio.index.name = None
 cross_ratio.columns.names = [None, None]
 cross_ratio
@@ -53,12 +51,11 @@ cross_ratio
 # しかし、製品を区別せずに集計すると、工場 2 のほうが不良品率は低くなる。
 
 #%%
-cross_all = pd.crosstab(
-    simpson1['品質'],
-    simpson1['工場'],
-    values=simpson1['数量'],
-    aggfunc=sum,
-    normalize='columns')
+cross_all = pd.crosstab(simpson1['品質'],
+                        simpson1['工場'],
+                        values=simpson1['数量'],
+                        aggfunc=sum,
+                        normalize='columns')
 cross_all.index.name = None
 cross_all.columns.name = None
 cross_all
@@ -70,27 +67,24 @@ cross_all
 
 #%%
 simpson2 = pd.read_csv('data/simpson2.csv')
-cross2 = pd.crosstab(
-    simpson2['属性1'], [simpson2['属性2'], simpson2['属性3']],
-    values=simpson2['数量'],
-    aggfunc=sum)
+cross2 = pd.crosstab(simpson2['属性1'], [simpson2['属性2'], simpson2['属性3']],
+                     values=simpson2['数量'],
+                     aggfunc=sum)
 cross2.index.name = None
 cross2.columns.names = [None, None]
 display(cross2)
-cross2_ratio = pd.crosstab(
-    simpson2['属性1'], [simpson2['属性2'], simpson2['属性3']],
-    values=simpson2['数量'],
-    aggfunc=sum,
-    normalize='columns')
+cross2_ratio = pd.crosstab(simpson2['属性1'], [simpson2['属性2'], simpson2['属性3']],
+                           values=simpson2['数量'],
+                           aggfunc=sum,
+                           normalize='columns')
 cross2_ratio.index.name = None
 cross2_ratio.columns.names = [None, None]
 display(cross2_ratio)
-cross2_all = pd.crosstab(
-    simpson2['属性1'],
-    simpson2['属性2'],
-    values=simpson2['数量'],
-    aggfunc=sum,
-    normalize='columns')
+cross2_all = pd.crosstab(simpson2['属性1'],
+                         simpson2['属性2'],
+                         values=simpson2['数量'],
+                         aggfunc=sum,
+                         normalize='columns')
 cross2_all.index.name = None
 cross2_all.columns.name = None
 display(cross2_all)
@@ -101,10 +95,9 @@ display(cross2_all)
 #%%
 trump = cross2.copy()
 trump.index = ['赤', '黒']
-trump.columns = pd.MultiIndex(
-    levels=[['汚れあり', '汚れなし'], ['絵柄', '数字']],
-    labels=[[0, 0, 1, 1], [0, 1, 0, 1]],
-    names=[None, None])
+trump.columns = pd.MultiIndex(levels=[['汚れあり', '汚れなし'], ['絵柄', '数字']],
+                              codes=[[0, 0, 1, 1], [0, 1, 0, 1]],
+                              names=[None, None])
 trump
 
 #%% [markdown]
@@ -114,10 +107,9 @@ trump
 #%%
 treat = cross2.copy()
 treat.index = ['生存', '死亡']
-treat.columns = pd.MultiIndex(
-    levels=[['男性', '女性'], ['旧治療法', '新治療法']],
-    labels=[[0, 0, 1, 1], [0, 1, 0, 1]],
-    names=[None, None])
+treat.columns = pd.MultiIndex(levels=[['男性', '女性'], ['旧治療法', '新治療法']],
+                              codes=[[0, 0, 1, 1], [0, 1, 0, 1]],
+                              names=[None, None])
 treat
 
 #%% [markdown]

@@ -2,7 +2,7 @@
 FROM ubuntu:18.04
 USER root
 ENV HOME /root
-ARG VERSION=0.2
+ARG VERSION=0.3
 ARG MAINTAINER="ScenesK<scenesk.ngt@gmail.com>"
 
 RUN apt update && apt upgrade -y

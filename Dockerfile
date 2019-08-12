@@ -2,7 +2,7 @@
 FROM ubuntu:18.04
 USER root
 ENV HOME /root
-ARG VERSION=0.3
+ARG VERSION=0.4
 ARG MAINTAINER="ScenesK<scenesk.ngt@gmail.com>"
 
 RUN apt update && apt upgrade -y
@@ -78,7 +78,8 @@ RUN pip install \
     seaborn==0.9.0 \
     bokeh==1.3.4 \
     matplotlib-venn==0.11.5 \
-    plotly==4.1.0
+    plotly==4.1.0 \
+    yellowbrick==0.9.1
 
 # INSTALL JUPYTER NOTEBOOK
 RUN pip install notebook==5.7.8 \

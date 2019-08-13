@@ -64,7 +64,8 @@ RUN pip install --upgrade pip && \
     pandas-datareader==0.7.4 \
     mlxtend==0.17.0 \
     networkx==2.3 \
-    sqlalchemy==1.3.6
+    sqlalchemy==1.3.6 \
+    imbalanced-learn==0.5.0
 RUN apt install -y graphviz && \
     pip install \
     pydot==1.4.1 \

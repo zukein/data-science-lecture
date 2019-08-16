@@ -1,4 +1,4 @@
-. ".\config.sh"
+. ".\config.ps1"
 
 docker start $CONTAINER
 cacls ./workspace/notebook.sh /g everyone:f

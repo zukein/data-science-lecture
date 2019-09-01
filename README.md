@@ -29,7 +29,7 @@
 
 - Docker
   - 講師と同じ環境
-  - WindowsはWindows10pro以外だと設定が難しい(以下のAnaconda/Minicondaを使用してください)
+  - WindowsはWindows10pro以外だと設定が難しい(Docker Toolboxを試してみて問題があれば以下のAnaconda/Minicondaを使用してください)
 - Anaconda/Miniconda
   - 比較的設定は容易
   - Pythonライブラリ以外の必要なものは自分でインストールする必要あり
@@ -44,18 +44,25 @@
 
    - [Mac](https://store.docker.com/editions/community/docker-ce-desktop-mac)
    - [Windows10pro](https://store.docker.com/editions/community/docker-ce-desktop-windows)
+   - [Windows10pro以外](https://docs.docker.com/toolbox/overview/)
 
 (以降、dockerが起動している状態で進める)
 
 2. このリポジトリをクローンまたはファイルをコピーする(親ディレクトリ含め間に日本語やスペースが入らないように)
 
-3. localhost(127.0.0.1)の8888ポートを使用している(他のJupyterを起動しているなど)の場合はconfig.shのJUPYTER_PORTの値を変更する
+3. localhost(127.0.0.1)の8888ポートや6006ポートを使用している(他のJupyterを起動しているなど)の場合は.envのJUPYTER_PORTやTENSOR_BOARD_PORTの値を変更する
 
 4. ターミナルからダウンロードしたフォルダに移動する(`cd`コマンドを使用)
 
-5. 以下のコマンドを実行する(PowerShellを使用する場合は、以下.shを.ps1に読み替える)
+5. workspace/up.shの権限を実行可能なように変更しておく
+   Mac
+   > chmod 777 workspace/up.sh
+   Windows
+   > icacls workspace\up.sh /grant Everyone:F
 
-   > ./build.sh
+6. 以下のコマンドを実行する
+
+   > docker-compose build
 
 ### Anaconda/Minicondaで構築
 
@@ -99,15 +106,18 @@
 
 1. Jupyterを起動する
 
-   > ./start.sh
+   > docker-compose up -d
 
 2. Jupyterにアクセスする
+
+   - Docker Toolboxを使っている場合は、以下のコマンドでIPアドレスを調べておき次の127.0.0.1と置き換える
+     > docker-machine inspect --format='{{.Driver.IPAddress}}' dev
 
    - ブラウザから127.0.0.1:8888にアクセスし、passwordにjupyterと入力する
 
 3. Jupyterを終了する
 
-   > ./stop.sh
+   > docker-compose stop
 
 ### Anaconda/Minicondaから使用
 

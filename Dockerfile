@@ -2,8 +2,6 @@
 FROM ubuntu:18.04
 USER root
 ENV HOME /root
-ARG VERSION=0.4
-ARG MAINTAINER="ScenesK<scenesk.ngt@gmail.com>"
 
 RUN apt update && apt upgrade -y
 RUN apt install -y \
@@ -14,7 +12,9 @@ ENV TZ Asia/Tokyo
 ARG DEBIAN_FRONTEND=noninteractive
 
 # INSTALL PYTHON
-ARG PYTHON_VERSION=3.7.4
+ARG PYTHON_VERSION
+ARG SQLITE_FILE
+ARG SQLITE_URL
 ARG PYTHON_ROOT=$HOME/local/python-$PYTHON_VERSION
 ENV PATH=$PYTHON_ROOT/bin:$PATH
 ARG PYENV_ROOT=$HOME/.pyenv
@@ -36,15 +36,15 @@ RUN apt-get update && apt-get install -y \
     tk-dev \
     libffi-dev \
     liblzma-dev && \
-    wget https://www.sqlite.org/2019/sqlite-autoconf-3280000.tar.gz && \
-    tar -xvf sqlite-autoconf-3280000.tar.gz && \
-    rm sqlite-autoconf-3280000.tar.gz && \
-    cd sqlite-autoconf-3280000 && \
+    wget ${SQLITE_URL}${SQLITE_FILE}.tar.gz && \
+    tar -xvf ${SQLITE_FILE}.tar.gz && \
+    rm ${SQLITE_FILE}.tar.gz && \
+    cd ${SQLITE_FILE} && \
     ./configure && \
     make && \
     make install && \
     cd .. && \
-    rm -rf sqlite-autoconf-3280000 && \
+    rm -rf ${SQLITE_FILE} && \
     git clone https://github.com/pyenv/pyenv.git $PYENV_ROOT && \
     $PYENV_ROOT/plugins/python-build/install.sh && \
     /usr/local/bin/python-build -v $PYTHON_VERSION $PYTHON_ROOT && \
@@ -128,4 +128,3 @@ RUN apt clean && \
 # SET WORKDIR
 VOLUME $HOME/workspace
 WORKDIR $HOME/workspace
-LABEL version=$VERSION maintainer=$MAINTAINER

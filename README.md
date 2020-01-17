@@ -21,7 +21,10 @@
 ### Rコマンダーをインストール
 
 1. RまたはRStudioのコンソールから以下を入力してパッケージをインストール
-   > install.packages(‘Rcmdr’, dependencies=TRUE)
+
+   ```sh
+   install.packages(‘Rcmdr’, dependencies=TRUE)
+   ```
 
 ## 実行環境の構築
 
@@ -55,14 +58,19 @@
 4. ターミナルからダウンロードしたフォルダに移動する(`cd`コマンドを使用)
 
 5. workspace/up.shの権限を実行可能なように変更しておく
-   Mac
-   > chmod 777 workspace/up.sh
-   Windows
-   > icacls workspace\up.sh /grant Everyone:F
+
+   ```sh
+   # Mac
+   chmod 777 workspace/up.sh
+   # Windows
+   icacls workspace\up.sh /grant Everyone:F
+   ```
 
 6. 以下のコマンドを実行する
 
-   > docker-compose build
+   ```sh
+   docker-compose build
+   ```
 
 ### Anaconda/Minicondaで構築
 
@@ -81,11 +89,15 @@
 
 4. 仮想環境に入る
 
-   > conda activate dslec
+   ```sh
+   conda activate dslec
+   ```
 
 5. Jupyter notebookのコンフィグファイルを作成
 
-   > jupyter notebook --generate-config
+   ```sh
+   jupyter notebook --generate-config
+   ```
 
 6. カスタムCSSを配置
 
@@ -106,33 +118,46 @@
 
 1. Jupyterを起動する
 
-   > docker-compose up -d
+   ```sh
+   docker-compose up -d
+   ```
 
 2. Jupyterにアクセスする
 
    - Docker Toolboxを使っている場合は、以下のコマンドでIPアドレスを調べておき次の127.0.0.1と置き換える
-     > docker-machine inspect --format='{{.Driver.IPAddress}}' dev
+
+      ```sh
+      docker-machine inspect --format='{{.Driver.IPAddress}}' dev
+      ```
 
    - ブラウザから127.0.0.1:8888にアクセスし、passwordにjupyterと入力する
 
 3. Jupyterを終了する
 
-   > docker-compose stop
+   ```sh
+   docker-compose stop
+   ```
 
 ### Anaconda/Minicondaから使用
 
 1. 仮想環境に入る
 
-   > conda activate dslec
+   ```sh
+   conda activate dslec
+   ```
 
 2. Jupyterを起動する(passwordはjupyter)
 
-   > jupyter notebook
+   ```sh
+   jupyter notebook
+   ```
 
 3. Jupyterを終了する
 
-   > Ctrl+C  
-   > conda deactivate
+   ```sh
+   Ctrl+C
+   conda deactivate
+   ```
 
 ## コンテンツについて
 

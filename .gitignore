@@ -2,4 +2,4 @@
 /*.log
 .ipynb_checkpoints/
 __pycache__/
-intermediate/
+intermediate-dev/

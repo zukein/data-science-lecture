@@ -58,7 +58,6 @@ RUN pip install --upgrade pip && \
     statsmodels==0.10.1 \
     scikit-learn==0.21.3 \
     opencv-python==4.1.0.25 \
-    lightgbm==2.2.3 \
     tensorflow==1.14.0 \
     pandas==0.25.0 \
     pandas-datareader==0.7.4 \
@@ -70,6 +69,8 @@ RUN apt install -y graphviz && \
     pip install \
     pydot==1.4.1 \
     pydotplus==2.0.2
+RUN apt install -y cmake && \
+    pip install lightgbm==2.2.3
 
 ARG MATPLOTLIBRC=$PYTHON_ROOT/lib/python3.7/site-packages/matplotlib/mpl-data/matplotlibrc
 RUN pip install matplotlib==3.1.1 && \

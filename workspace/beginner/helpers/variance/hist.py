@@ -1,27 +1,26 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.figure import figaspect
-from ipywidgets import interact, FloatSlider
+import pandas as pd
+import plotly.express as px
 
-
-def hist(scale):
-    x = np.random.normal(size=1000000, scale=scale)
-    fig = plt.figure(figsize=figaspect(1))
-    ax = fig.gca()
-    ax.hist(x, range=(-6, 6), bins=200, density=True)
-    ax.set(xlim=(-6, 6), ylim=(0, 1))
-    plt.show()
+np.random.seed(1234)
 
 
 def show():
-    style = dict(description_width='initial')
-    interact(
-        hist,
-        scale=FloatSlider(
-            value=1.0,
-            min=0.5,
-            max=2,
-            step=0.1,
-            description='データの散らばり具合：',
-            continuous_update=False,
-            style=style))
+    df = pd.DataFrame()
+
+    for scale in range(5, 21):
+        scale /= 10
+        x = np.random.normal(size=40000, scale=scale)
+        df = df.append(pd.DataFrame({'データの散らばり具合': scale, 'x': x}))
+
+    fig = px.histogram(df,
+                       'x',
+                       animation_frame='データの散らばり具合',
+                       labels={'x': ''},
+                       histnorm='probability density',
+                       range_x=(-6, 6),
+                       range_y=(0, 1),
+                       nbins=200,
+                       width=600,
+                       height=600)
+    fig.show()

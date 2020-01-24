@@ -127,7 +127,7 @@
    - Docker Toolboxを使っている場合は、以下のコマンドでIPアドレスを調べておき次の127.0.0.1と置き換える
 
       ```sh
-      docker-machine inspect --format='{{.Driver.IPAddress}}' dev
+      docker-machine inspect --format='{{.Driver.IPAddress}}' default
       ```
 
    - ブラウザから127.0.0.1:8888にアクセスし、passwordにjupyterと入力する

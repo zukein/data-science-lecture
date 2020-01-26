@@ -1,0 +1,70 @@
+digraph {
+    graph [
+        rankdir = TB
+        splines = false
+        nodesep = 0.5
+        ranksep = 0.5
+    ]
+
+    node1 [
+        label = "トレーニングデータでの精度が要求水準に達しているか？"
+    ]
+    node21 [
+        label = "テストデータの精度は？"
+    ]
+    node22 [
+        shape = box
+        label = "未学習・高バイアス"
+    ]
+    node211 [
+        shape = box
+        label = "合格"
+    ]
+    node212 [
+        shape = box
+        label = "過学習・高バリアンス"
+    ]
+    node221 [
+        shape = diamond
+        label = "特徴追加"
+    ]
+    node222 [
+        shape = diamond
+        label = "高バリアンス化"
+    ]
+    node2111 [
+        shape = diamond
+        label = "実装・運用"
+    ]
+    node2121 [
+        color = red
+        fontcolor = red
+        label = "?"
+    ]
+    node21211 [
+        shape = diamond
+        label = "データを増やす"
+    ]
+    node21212 [
+        shape = diamond
+        label = "高バイアス化"
+    ]
+    node1 -> node21 [
+        label = "達している"
+    ]
+    node1 -> node22 [
+        label = "達していない"
+    ]
+    node21 -> node211 [
+        label = "トレーニングデータと遜色ない"
+    ]
+    node21 -> node212 [
+        label = "トレーニングデータから乖離"
+    ]
+    node22 -> node221
+    node22 -> node222
+    node211 -> node2111
+    node212 -> node2121
+    node2121 -> node21211
+    node2121 -> node21212
+}

@@ -2,4 +2,4 @@ conda create -n dslec python=3.7.4
 conda activate dslec
 pip install --user --upgrade pip
 pip install --user -r ./workspace/requirements.txt
-conda deactivate dslec
+conda deactivate

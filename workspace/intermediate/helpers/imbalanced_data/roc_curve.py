@@ -72,7 +72,7 @@ def show():
     p = SelectionSlider(options=OrderedDict([('ランダム', 0.5), ('悪い', 0.6),
                                              ('そこそこ', 0.7), ('良い', 0.8)]),
                         value=0.5,
-                        description='精度',
+                        description='性能',
                         continuous_update=False)
     t = FloatSlider(value=0.5,
                     min=0,
